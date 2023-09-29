@@ -11,6 +11,7 @@ const CountryCard = ({country}) => {
               >
                 <Card className="h-100">
                   <Card.Body className="d-flex flex-column">
+                    <Card.Img src={country.flags.svg} alt={country.name.common}/>
                     <Card.Title>{country.name.common}</Card.Title>
                     <Card.Subtitle className="mb-5 text-muted">
                       {country.capital}
@@ -20,14 +21,23 @@ const CountryCard = ({country}) => {
                       className="flex-grow-1 justify-content-end"
                     >
                       <ListGroup.Item>
-                        <i className="bi bi-translate me-2"></i>
+                        <i className="bi bi-translate me-2">
+                          {Object.values(country.languages ?? {}).join(", ")}
+                        </i>
                       </ListGroup.Item>
                       <ListGroup.Item>
-                        <i className="bi bi-cash-coin me-2"></i>
+                        <i className="bi bi-cash-coin me-2">
+                          {Object.values(country.currencies || {})
+                            .map((currency) => currency.name)
+                            .join(", ")
+                          }
+                        </i>
                       </ListGroup.Item>
 
                       <ListGroup.Item>
-                        <i className="bi bi-people me-2"></i>
+                        <i className="bi bi-people me-2">
+                          {country.population.toLocaleString()}
+                        </i>
                       </ListGroup.Item>
                     </ListGroup>
                   </Card.Body>
