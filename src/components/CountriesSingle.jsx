@@ -17,6 +17,8 @@ const CountriesSingle = () => {
 
   //Destructing variables
   const country = location.state.country;
+  console.log('country:', country)
+  console.log('code is:', process.env.REACT_APP_OPENWEATHER_KEY )
 
   useEffect(()=>{
     if (!country.capital){

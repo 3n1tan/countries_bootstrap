@@ -10,23 +10,14 @@ import { initializeCountries } from '../features/countries/countriesSlice';
 const Countries = () => {
   const dispatch = useDispatch();
   const countriesList = useSelector((state) => state.countries.countries);
-  const loading = useSelector((state) => state.countries.isLoading)
-  const [search, setSearch] = useState('')
-  console.log(countriesList)
-
-  console.log("Search: ", search)
+  const loading = useSelector((state) => state.countries.isLoading);
+  const [search, setSearch] = useState('');
 
   useEffect(()=> {
     dispatch(initializeCountries())
 
-  },[])
+  },[dispatch])
 
-  // We will be replacing this with data from our API.
-  const country = {
-    name: {
-      common: 'Example Country'
-    }
-  }
 
   return (
     <Container fluid>
@@ -47,7 +38,7 @@ const Countries = () => {
       <Row xs={2} md={3} lg={4} className=" g-3">
         {countriesList.reduce((prev, country) => //filtering using the reducer method before output display
               country.name.common.toLowerCase().includes(search.toLowerCase())
-              ? [...prev, <CountryCard key={country.name} country={country} />]
+              ? [...prev, <CountryCard key={country.name.common} country={country} />]
               : prev,
               [])
         }

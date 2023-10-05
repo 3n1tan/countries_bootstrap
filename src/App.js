@@ -5,11 +5,11 @@ import CountriesSingle from './components/CountriesSingle';
 import Home from './components/Home';
 import Layout from './pages/Layout';
 import Register from './components/Register';
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import Login from './components/Login';
 import ProtectedRoute from './auth/ProtectedRoute';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './auth/fireBase';
+import Favourites from './components/Favourites';
 
 const App = () => {
   const [user] = useAuthState(auth)
@@ -23,6 +23,7 @@ const App = () => {
           <Route path='/register' element={<Register />}/>
 
           <Route element={<ProtectedRoute user={user} />}>
+            <Route path="/favourites" element={<Favourites />} />
             <Route path="/countries" element={<Countries />} />
             <Route path="/countries/:single" element={<CountriesSingle />} />
           </Route>
